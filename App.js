@@ -19,18 +19,19 @@ const App = () => {
 
 
     useEffect(() => {
-        socketServices.on('received_message', (data) => {
+        socketServices.on('received_message', (msg) => {
             console.log('messgae received in app', msg)
             let cloneArry = [...data]
             setData(cloneArry.concat(msg))
 
         })
-    }, [])
+    }, [data])
 
 
     const sendMessage = () => {
         if (!!message) {
             socketServices.emit('send_message', message)
+            setmessage('')
             return;
 
         }
